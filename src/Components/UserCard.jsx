@@ -6,7 +6,6 @@ const UserCard = (props) => {
     return (
         <div className='card1'>
             <div className='centreFlex'>
-                
                 <img src={avatar} alt="" />
             </div>
             

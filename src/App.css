@@ -21,6 +21,7 @@
   font-family: monospace;
   font-size: x-large;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .cardGrid
