@@ -1,24 +1,59 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import UserCard from './Components/UserCard';
+import axios from 'axios'
 
 function App() {
+
+  const [user,setUser]=useState([])
+  const[loading,setLoading]=useState(false)
+  
+
+  const getUser =()=>
+  {
+    axios.get("https://reqres.in/api/users?page=1")
+    .then( user =>{
+      setUser(user.data.data)
+      setLoading(false)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  }
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <div className="container">
+      <div className="navb">
+        <div></div>
+        <div>
+          Amor Fati
+        </div>
+
+        <button className="btn" onClick={()=>{setLoading(true);setTimeout(getUser,1000)}}>
+          Get users
+        </button>
+      </div>
+
+
+      <div style={{ backgroundColor: "rgb(236, 236, 236)"}}>
+      {loading?<div className='loading'>Loading.... please wait !!!</div>:null}
+
+      <div className='cardGrid'>
+          {user.map((data,index)=><div  key={index} >
+            <UserCard data={data}/>
+      </div>)}
     </div>
+      
+      </div>
+
+    </div>
+
+   
+
+    </>
   );
 }
 
